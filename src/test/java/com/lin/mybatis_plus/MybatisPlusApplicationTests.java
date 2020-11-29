@@ -1,5 +1,6 @@
 package com.lin.mybatis_plus;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lin.mybatis_plus.mapper.UserMapper;
 import com.lin.mybatis_plus.pojo.User;
 import org.junit.jupiter.api.Test;
@@ -99,4 +100,23 @@ class MybatisPlusApplicationTests {
         List<User> users = userMapper.selectByMap(map);
         users.forEach(System.out::print);
     }
+
+    //测试分页查询
+    @Test
+    void  testpage(){
+        Page<User> page = new Page<>(1,5);
+        userMapper.selectPage(page,null);
+
+        page.getRecords().forEach(System.out::print);
+
+    }
+    @Test
+    void testdelete(){
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("name","lhd");
+        userMapper.deleteByMap(map);
+
+
+    }
+
 }
